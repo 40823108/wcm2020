@@ -162,12 +162,12 @@ def midterm():
 if __name__== '__main__': 
     app.run(ssl_context=context)</pre>
 <h4>W11-加入SSH:</h4>
-<p>Putty.exe</p>
+<p>Putty.exe:</p>
 <p><img alt="" height="442" src="/images/擷取.JPG-1.JPG" width="452"/></p>
-<p>key</p>
-<p><img alt="" height="675" src="/images/擷取.JPG-2.JPG" width="1059"/></p>
-<p>github-key</p>
-<p><img alt="" height="1050" src="/images/擷取.JPG" width="1680"/></p>
+<p>key:</p>
+<p><img alt="" height="339" src="/images/擷取.JPG-2.JPG" width="532"/></p>
+<p>github-key:</p>
+<p><img alt="" height="337" src="/images/擷取.JPG" width="540"/></p>
 <h2>W12-W15</h2>
 <h4>W12</h4>
 <p>在Windows10中安裝Ubuntu 20.04虛擬主機</p>
@@ -175,4 +175,71 @@ if __name__== '__main__':
 <h4>W13</h4>
 <p>安裝Oracle VM VirtualBox建立虛擬主機</p>
 <p><img alt="" height="333" src="/images/擷取.JPG-4.JPG" width="561"/></p>
+<h4>W14</h4>
+<p>編譯NGINX<span>在虛擬與實體主機上完成網際 PDF 檔案管理系統.</span></p>
+<h4>W15</h4>
+<p>利用HxD編修pip.exe</p>
+<p>將Pythonw.exe修改為Python.exe</p>
+<p><img alt="" height="347" src="/images/1591932301485.jpg" width="541"/></p>
+<p>利用Pypdf2切割PDF檔案</p>
+<h4>Pypdf2 examples:</h4>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false"># pypdf2_ex1.py
+import os
+from PyPDF2 import PdfFileWriter, PdfFileReader
+ 
+pdfReader = PdfFileReader(open("2002_Book_Real-WorldASPNETBuildingAConte.pdf", "rb"))
+information = [("WhatIsCMS",18,45)]
+ 
+for page in range(len(information)):
+    pdf_writer = PdfFileWriter()
+    start = information[page][1]
+    end = information[page][2]
+    while start&lt;=end:
+        pdf_writer.addPage(pdfReader.getPage(start-1))
+        start+=1
+    if not os.path.exists("./"):
+        os.makedirs(savepath)
+    output_filename = '{}_{}_page_{}.pdf'.format(information[page][0],information[page][1], information[page][2])
+    with open(output_filename,'wb') as out:
+        pdf_writer.write(out)</pre>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false"># pypdf2_ex2.py
+import os
+from PyPDF2 import PdfFileWriter, PdfFileReader
+ 
+pdfReader = PdfFileReader(open("Beginning-Git-and-GitHub.pdf", "rb"))
+information = [("GitAndGithub",17,105),("GitAndGithub",107,194),("GitAndGithub",196,289)]
+ 
+for page in range(len(information)):
+    pdf_writer = PdfFileWriter()
+    start = information[page][1]
+    end = information[page][2]
+    while start&lt;=end:
+        pdf_writer.addPage(pdfReader.getPage(start-1))
+        start+=1
+    if not os.path.exists("./"):
+        os.makedirs(savepath)
+    output_filename = '{}_{}_page_{}.pdf'.format(information[page][0],information[page][1], information[page][2])
+    with open(output_filename,'wb') as out:
+        pdf_writer.write(out)</pre>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false"># pypdf2_ex3.py
+# merge several pdf files
+import sys
+import PyPDF2
+ 
+pdf_write_object = PyPDF2.PdfFileWriter()
+ 
+#for i in sys.argv[1:]:
+for i in ["WhatIsCMS.pdf","InforLifeCycle.pdf","EnterpriseContentManage.pdf"]:
+    pdf_read_object = PyPDF2.PdfFileReader(i)
+    print('processing file : '+ i + 'number of pages : ' +  str(pdf_read_object.numPages))
+    for page in range(pdf_read_object.numPages):
+        pdf_write_object.addPage(pdf_read_object.getPage(page))
+ 
+final_file_object = open('2020CMS.pdf', 'wb')
+pdf_write_object.write(final_file_object)
+final_file_object.close()</pre>
+<p>選取要切割的PDF檔案</p>
+<p><img alt="" height="342" src="/images/擷取.JPG-6.JPG" width="538"/></p>
 <p></p>
+<p>切割完成的PDF檔案</p>
+<p><img alt="" height="344" src="/images/擷取.JPG-5.JPG" width="538"/></p>
