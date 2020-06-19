@@ -143,7 +143,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='about.html'>about</a><li><a href='Develop.html'>Develop</a><li class='has-children'><a href='每周進度.html'>每周進度</a><ul class='dropdown'><li><a href='W10-W11.html'>W10-W11</a></li>
+                     <li><a href='about.html'>about</a><li><a href='Develop.html'>Develop</a><li class='has-children'><a href='每周進度.html'>每周進度</a><ul class='dropdown'><li><a href='W12-W15.html'>W12-W15</a></li>
                       </ul>
                 </nav>
               </div>
@@ -154,159 +154,13 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">每周進度 << <a href='每周進度.html'>Previous</a> <br /><h1>W10-W11</h1>
-<p><span>利用 Python 程式讀取同學修課檔案, 以及從 Google Sheet 轉出的 .csv, 分別處理為 List 與 Dictionary 資料格式之後, 逐一根據同學 List 學號, 從 Dictionary 取出自評成績.</span></p>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import csv
- 
-# read student list
- 
-filename = 'E:/wcm2020/data/tmp/2020_spring_score/2a/2a_list.txt'
-with open(filename, encoding="utf-8") as f:
-    content = f.readlines()
-#print(content)
-student = [x.strip() for x in content] 
-#print(student)
- 
- 
-# Timestamp, email, 修課名稱, url, score, desp, memo
-# 0, 1, 2, 3, 4, 5, 6
-#total = 0
-all = {}
-with open('y:/2020midterm.csv', encoding="utf-8") as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    #print(csv_reader)
- 
-    line_count = 0
-    for row in csv_reader:
-        if line_count == 0:
-            #print(f'Column names are {", ".join(row)}')
-            line_count += 1
-        else:
-            student_num = row[1].split("@")[0]
-            #print(student_num)
-            student_score = row[4]
-            #print(student_score)
-            try:
-                all.update({student_num: student_score})
-            except:
-                all.update({student_num: "error"})
-            #print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
-            #print(f'\t{row[4]}')
-            #total += int(row[4])
-            line_count += 1
-#print(all)
-#print(student)
- 
- 
-for i in student:
-     
-    #if i in all:
-        #pass
-    #else:
-        #print(str(i))
-     
-    try:
-        print(i + "\t" + all[i])
-    except:
-        print(i + "\t60")
- 
-    #print(f'Processed {line_count} lines.')
-    #print("平均=" + str(total/line_count))
-</pre>
-<h4>flask 程式一:</h4>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask
-  
-app = Flask(__name__)
-  
-@app.route('/') 
-def hello_world():
-    return 'Hello, From Flask!'
-  
-if __name__== '__main__': 
-    app.run()</pre>
-<p><span>Flask 程式二:</span></p>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, render_template
-import ssl
-import csv
-  
-context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain('localhost.crt', 'localhost.key')
-  
-app = Flask(__name__)
-  
-@app.route('/') 
-def hello_world():
-    return 'Hello, From Flask!'
-  
-@app.route('/ROCflag')
-def drawROC():
-    return render_template("ROCflag.html")
- 
-@app.route("/midterm")
-def midterm():
-    # read student list
- 
-    filename = '1a_list.txt'
-    with open(filename, encoding="utf-8") as f:
-        content = f.readlines()
-    #print(content)
-    student = [x.strip() for x in content] 
-    #print(student)
- 
- 
-    # Timestamp, email, 修課名稱, url, score, desp, memo
-    # 0, 1, 2, 3, 4, 5, 6
-    #total = 0
-    all = {}
-    with open('2020midterm.csv', encoding="utf-8") as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        #print(csv_reader)
- 
-        line_count = 0
-        for row in csv_reader:
-            if line_count == 0:
-                #print(f'Column names are {", ".join(row)}')
-                line_count += 1
-            else:
-                student_num = row[1].split("@")[0]
-                #print(student_num)
-                student_score = row[3]
-                #print(student_score)
-                try:
-                    all.update({student_num: student_score})
-                except:
-                    all.update({student_num: "error"})
-                #print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
-                #print(f'\t{row[4]}')
-                #total += int(row[4])
-                line_count += 1
-    #print(all)
-    #print(student)
- 
-    output = ""
-    for i in student:
-         
-        #if i in all:
-            #pass
-        #else:
-            #print(str(i))
-         
-        try:
-            output += (str(i) + ": <a href='/get_page/W10-W11/" + str(all[i]) + "'>"+ str(all[i]) + "</a><br/>")
-        except:
-            output += (str(i) + ": no data<br/>")
-         
-    return output
-      
-if __name__== '__main__': 
-    app.run(ssl_context=context)</pre>
-<h4>W11-加入SSH:</h4>
-<p>Putty.exe</p>
-<p><img alt="" height="442" src="./../images/擷取.JPG-1.JPG" width="452"/></p>
-<p>key</p>
-<p><img alt="" height="675" src="./../images/擷取.JPG-2.JPG" width="1059"/></p>
-<p>github-key</p>
-<p><img alt="" height="1050" src="./../images/擷取.JPG" width="1680"/></p>
+    <div id="tipue_search_content">每周進度 << <a href='每周進度.html'>Previous</a> <br /><h1>W12-W15</h1>
+<h4>W12</h4>
+<p>在Windows10中安裝Ubuntu 20.04虛擬主機</p>
+<p><img alt="" height="346" src="./../images/擷取.JPG-3.JPG" width="552"/></p>
+<h4>W13</h4>
+<p>安裝Oracle VM VirtualBox建立虛擬主機</p>
+<p><img alt="" height="333" src="./../images/擷取.JPG-4.JPG" width="561"/></p>
 <p></p><br />每周進度 << <a href='每周進度.html'>Previous</a> </div>
         
     <!-- footer -->
