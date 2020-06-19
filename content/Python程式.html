@@ -154,12 +154,73 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">about << <a href='about.html'>Previous</a> <a href='每周進度.html'>Next</a> >> 每周進度<br /><h1>Develop</h1>
-<p><a href="https://github.com/mdecourse/cmsimde">https://github.com/mdecourse/cmsimde</a> 的開發, 可以在一個目錄中放入 cmsimde, 然後將 up_dir 中的內容放到與 cmsimde 目錄同位階的地方, 使用 command 進入 cmsimde 目錄, 執行 python wsgi.py, 就可以啟動, 以瀏覽器 https://localhost:9443 就可以連接, 以 admin 作為管理者密碼, 就可以登入維護內容.</p>
-<p>cmsimde 的開發採用 Leo Editor, 開啟 cmsimde 目錄中的 cmsimde.leo 就可以進行程式修改, 結束後, 若要保留網際內容, 只要將 cmsimde 外部的內容倒回 up_dir 目錄中即可後續對 cmsimde 遠端倉儲進行改版.</p>
-<p>init.py 位於  up_dir 目錄, 可以設定 site_title 與 uwsgi 等變數.</p>
-<p>we have </p>
-<br />about << <a href='about.html'>Previous</a> <a href='每周進度.html'>Next</a> >> 每周進度</div>
+    <div id="tipue_search_content">W12-W15 << <a href='W12-W15.html'>Previous</a> <br /><h1>Python程式</h1>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import csv
+   
+# read student list
+filename = 'D:/1a/1alist.txt'
+with open(filename, encoding="utf-8") as f:
+    content = f.readlines()
+    student = [x.strip() for x in content]
+#print(content)
+#print(student)
+   
+# Timestamp, email, ????, url, score, desp, memo
+# 0, 1, 2, 3, 4, 5, 6
+#total = 0
+  
+all = {}
+with open('D:/1a/1a.csv', encoding="utf-8") as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+       
+    line_count = 0
+    for row in csv_reader:
+        if line_count == 0:
+            #print(f'Column names are {", ".join(row)}')
+            line_count += 1
+        else:
+            student_num = row[1].split("@")[0]
+            #print(student_num)
+            student_score = row[4]
+            #print(student_score)
+            try:
+                all.update({student_num: student_score})
+            except:
+                all.update({student_num: "error"})
+            #print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
+            #print(f'\t{row[4]}')
+            #total += int(row[4])
+            line_count += 1
+#print(all)
+#print(student)
+  
+for i in student:
+       
+    #if i in all:
+        #pass
+    #else:
+        #print(str(i))
+       
+    try:
+        print(i + "\t" + all[i])
+    except:
+        print(i + "\t60")
+  
+   
+    #print(f'Processed {line_count} lines.')
+    #print("??=" + str(total/line_count))</pre>
+<p><strong>Flask程式:</strong></p>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask
+   
+app = Flask(__name__)
+   
+@app.route('/') 
+def hello_world():
+    return 'Hello, From Flask!'
+   
+if __name__== '__main__': 
+    app.run()
+</pre><br />W12-W15 << <a href='W12-W15.html'>Previous</a> </div>
         
     <!-- footer -->
       <div class="container">

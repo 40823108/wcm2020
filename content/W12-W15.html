@@ -143,7 +143,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='about.html'>about</a><li><a href='Develop.html'>Develop</a><li class='has-children'><a href='每周進度.html'>每周進度</a><ul class='dropdown'><li><a href='W10-W11.html'>W10-W11</a><li><a href='W12-W15.html'>W12-W15</a></li>
+                     <li><a href='about.html'>about</a><li><a href='Develop.html'>Develop</a><li class='has-children'><a href='每周進度.html'>每周進度</a><ul class='dropdown'><li><a href='W10-W11.html'>W10-W11</a><li><a href='W12-W15.html'>W12-W15</a></li></ul><li><a href='Python程式.html'>Python程式</a></li>
                       </ul>
                 </nav>
               </div>
@@ -154,7 +154,7 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">W10-W11 << <a href='W10-W11.html'>Previous</a> <br /><h1>W12-W15</h1>
+    <div id="tipue_search_content">W10-W11 << <a href='W10-W11.html'>Previous</a> <a href='Python程式.html'>Next</a> >> Python程式<br /><h1>W12-W15</h1>
 <h4>W12</h4>
 <p>在Windows10中安裝Ubuntu 20.04虛擬主機</p>
 <p><img alt="" height="346" src="./../images/擷取.JPG-3.JPG" width="552"/></p>
@@ -167,7 +167,67 @@ img.add_border {
 <p>利用HxD編修pip.exe</p>
 <p>將Pythonw.exe修改為Python.exe</p>
 <p><img alt="" height="347" src="./../images/1591932301485.jpg" width="541"/></p>
-<p></p><br />W10-W11 << <a href='W10-W11.html'>Previous</a> </div>
+<p>利用Pypdf2切割PDF檔案</p>
+<h4>Pypdf2 examples:</h4>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false"># pypdf2_ex1.py
+import os
+from PyPDF2 import PdfFileWriter, PdfFileReader
+ 
+pdfReader = PdfFileReader(open("2002_Book_Real-WorldASPNETBuildingAConte.pdf", "rb"))
+information = [("WhatIsCMS",18,45)]
+ 
+for page in range(len(information)):
+    pdf_writer = PdfFileWriter()
+    start = information[page][1]
+    end = information[page][2]
+    while start&lt;=end:
+        pdf_writer.addPage(pdfReader.getPage(start-1))
+        start+=1
+    if not os.path.exists("./"):
+        os.makedirs(savepath)
+    output_filename = '{}_{}_page_{}.pdf'.format(information[page][0],information[page][1], information[page][2])
+    with open(output_filename,'wb') as out:
+        pdf_writer.write(out)</pre>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false"># pypdf2_ex2.py
+import os
+from PyPDF2 import PdfFileWriter, PdfFileReader
+ 
+pdfReader = PdfFileReader(open("Beginning-Git-and-GitHub.pdf", "rb"))
+information = [("GitAndGithub",17,105),("GitAndGithub",107,194),("GitAndGithub",196,289)]
+ 
+for page in range(len(information)):
+    pdf_writer = PdfFileWriter()
+    start = information[page][1]
+    end = information[page][2]
+    while start&lt;=end:
+        pdf_writer.addPage(pdfReader.getPage(start-1))
+        start+=1
+    if not os.path.exists("./"):
+        os.makedirs(savepath)
+    output_filename = '{}_{}_page_{}.pdf'.format(information[page][0],information[page][1], information[page][2])
+    with open(output_filename,'wb') as out:
+        pdf_writer.write(out)</pre>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false"># pypdf2_ex3.py
+# merge several pdf files
+import sys
+import PyPDF2
+ 
+pdf_write_object = PyPDF2.PdfFileWriter()
+ 
+#for i in sys.argv[1:]:
+for i in ["WhatIsCMS.pdf","InforLifeCycle.pdf","EnterpriseContentManage.pdf"]:
+    pdf_read_object = PyPDF2.PdfFileReader(i)
+    print('processing file : '+ i + 'number of pages : ' +  str(pdf_read_object.numPages))
+    for page in range(pdf_read_object.numPages):
+        pdf_write_object.addPage(pdf_read_object.getPage(page))
+ 
+final_file_object = open('2020CMS.pdf', 'wb')
+pdf_write_object.write(final_file_object)
+final_file_object.close()</pre>
+<p>選取要切割的PDF檔案</p>
+<p><img alt="" height="342" src="./../images/擷取.JPG-6.JPG" width="538"/></p>
+<p>切割完成的PDF檔案<img alt="" height="344" src="./../images/擷取.JPG-5.JPG" width="538"/></p>
+<br />W10-W11 << <a href='W10-W11.html'>Previous</a> <a href='Python程式.html'>Next</a> >> Python程式</div>
         
     <!-- footer -->
       <div class="container">
