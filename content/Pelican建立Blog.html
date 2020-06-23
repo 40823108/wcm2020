@@ -154,160 +154,24 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">每周進度 << <a href='每周進度.html'>Previous</a> <a href='W12-W15.html'>Next</a> >> W12-W15<br /><h1>W10-W11</h1>
-<p><span>利用 Python 程式讀取同學修課檔案, 以及從 Google Sheet 轉出的 .csv, 分別處理為 List 與 Dictionary 資料格式之後, 逐一根據同學 List 學號, 從 Dictionary 取出自評成績.</span></p>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import csv
- 
-# read student list
- 
-filename = 'E:/wcm2020/data/tmp/2020_spring_score/2a/2a_list.txt'
-with open(filename, encoding="utf-8") as f:
-    content = f.readlines()
-#print(content)
-student = [x.strip() for x in content] 
-#print(student)
- 
- 
-# Timestamp, email, 修課名稱, url, score, desp, memo
-# 0, 1, 2, 3, 4, 5, 6
-#total = 0
-all = {}
-with open('y:/2020midterm.csv', encoding="utf-8") as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    #print(csv_reader)
- 
-    line_count = 0
-    for row in csv_reader:
-        if line_count == 0:
-            #print(f'Column names are {", ".join(row)}')
-            line_count += 1
-        else:
-            student_num = row[1].split("@")[0]
-            #print(student_num)
-            student_score = row[4]
-            #print(student_score)
-            try:
-                all.update({student_num: student_score})
-            except:
-                all.update({student_num: "error"})
-            #print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
-            #print(f'\t{row[4]}')
-            #total += int(row[4])
-            line_count += 1
-#print(all)
-#print(student)
- 
- 
-for i in student:
-     
-    #if i in all:
-        #pass
-    #else:
-        #print(str(i))
-     
-    try:
-        print(i + "\t" + all[i])
-    except:
-        print(i + "\t60")
- 
-    #print(f'Processed {line_count} lines.')
-    #print("平均=" + str(total/line_count))
-</pre>
-<h4>flask 程式一:</h4>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask
-  
-app = Flask(__name__)
-  
-@app.route('/') 
-def hello_world():
-    return 'Hello, From Flask!'
-  
-if __name__== '__main__': 
-    app.run()</pre>
-<p><span>Flask 程式二:</span></p>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, render_template
-import ssl
-import csv
-  
-context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain('localhost.crt', 'localhost.key')
-  
-app = Flask(__name__)
-  
-@app.route('/') 
-def hello_world():
-    return 'Hello, From Flask!'
-  
-@app.route('/ROCflag')
-def drawROC():
-    return render_template("ROCflag.html")
- 
-@app.route("/midterm")
-def midterm():
-    # read student list
- 
-    filename = '1a_list.txt'
-    with open(filename, encoding="utf-8") as f:
-        content = f.readlines()
-    #print(content)
-    student = [x.strip() for x in content] 
-    #print(student)
- 
- 
-    # Timestamp, email, 修課名稱, url, score, desp, memo
-    # 0, 1, 2, 3, 4, 5, 6
-    #total = 0
-    all = {}
-    with open('2020midterm.csv', encoding="utf-8") as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        #print(csv_reader)
- 
-        line_count = 0
-        for row in csv_reader:
-            if line_count == 0:
-                #print(f'Column names are {", ".join(row)}')
-                line_count += 1
-            else:
-                student_num = row[1].split("@")[0]
-                #print(student_num)
-                student_score = row[3]
-                #print(student_score)
-                try:
-                    all.update({student_num: student_score})
-                except:
-                    all.update({student_num: "error"})
-                #print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
-                #print(f'\t{row[4]}')
-                #total += int(row[4])
-                line_count += 1
-    #print(all)
-    #print(student)
- 
-    output = ""
-    for i in student:
-         
-        #if i in all:
-            #pass
-        #else:
-            #print(str(i))
-         
-        try:
-            output += (str(i) + ": <a href='/get_page/W10-W11/" + str(all[i]) + "'>"+ str(all[i]) + "</a><br/>")
-        except:
-            output += (str(i) + ": no data<br/>")
-         
-    return output
-      
-if __name__== '__main__': 
-    app.run(ssl_context=context)</pre>
-<h4>W11-加入SSH:</h4>
-<p>Putty.exe:</p>
-<p><img alt="" height="442" src="./../images/擷取.JPG-1.JPG" width="452"/></p>
-<p>key:</p>
-<p><img alt="" height="339" src="./../images/擷取.JPG-2.JPG" width="532"/></p>
-<p>github-key:</p>
-<p><img alt="" height="337" src="./../images/擷取.JPG" width="540"/></p>
-<br />每周進度 << <a href='每周進度.html'>Previous</a> <a href='W12-W15.html'>Next</a> >> W12-W15</div>
+    <div id="tipue_search_content">SSH Putty設定 << <a href='SSH Putty設定.html'>Previous</a> <a href='@gm帳號建立blogger.html'>Next</a> >> @gm帳號建立blogger<br /><h1>Pelican建立Blog</h1>
+<p>安裝markdon與leo與pelican</p>
+<p><img alt="" height="285" src="./../images/安裝markdown leo pelican.JPG" width="543"/></p>
+<p>加入disqus</p>
+<p><img alt="" height="340" src="./../images/加入disqus.JPG" width="543"/></p>
+<p>修改共用裡的資料</p>
+<p><img alt="" height="433" src="./../images/修改共用裡的資料.JPG" width="548"/></p>
+<p>修改遠端裡的資料</p>
+<p><img alt="" height="431" src="./../images/修改遠端裡的資料.JPG" width="547"/></p>
+<p>修改markdown</p>
+<p><img alt="" height="427" src="./../images/修改markdown.JPG" width="544"/></p>
+<p>執行</p>
+<p><img alt="" height="310" src="./../images/執行.JPG" width="551"/></p>
+<p>上傳</p>
+<p><img alt="" height="286" src="./../images/上傳.JPG" width="549"/></p>
+<p>blog建立成功</p>
+<p><img alt="" height="339" src="./../images/成功.JPG" width="543"/></p>
+<br />SSH Putty設定 << <a href='SSH Putty設定.html'>Previous</a> <a href='@gm帳號建立blogger.html'>Next</a> >> @gm帳號建立blogger</div>
         
     <!-- footer -->
       <div class="container">
